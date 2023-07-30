@@ -1,4 +1,3 @@
-// Get elements
 const form = document.getElementById('todo-form');
 const taskInput = document.getElementById('task-input');
 const dueDateInput = document.getElementById('due-date-input');
@@ -34,28 +33,38 @@ function renderTasks() {
       const dateCompletedSpan = document.createElement('span');
       dateCompletedSpan.textContent = task.dateCompleted ? `Completed on: ${formatDate(task.dateCompleted)}` : '';
       li.appendChild(dateCompletedSpan);
-    }
 
-    const completeButton = document.createElement('button');
-    completeButton.textContent = 'Complete';
-    completeButton.addEventListener('click', () => {
-      toggleTaskStatus(index);
-    });
+      const incompleteButton = document.createElement('button');
+      incompleteButton.textContent = 'Incomplete';
+      incompleteButton.classList.add('incomplete-button');
+      incompleteButton.addEventListener('click', () => {
+        toggleTaskStatus(index);
+      });
+      li.appendChild(incompleteButton);
+    } else {
+      const completeButton = document.createElement('button');
+      completeButton.textContent = 'Complete';
+      completeButton.classList.add('complete-button');
+      completeButton.addEventListener('click', () => {
+        toggleTaskStatus(index);
+      });
+      li.appendChild(completeButton);
+    }
 
     const editButton = document.createElement('button');
     editButton.textContent = 'Edit';
+    editButton.classList.add('edit-button');
     editButton.addEventListener('click', () => {
       editTask(index);
     });
+    li.appendChild(editButton);
 
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
+    deleteButton.classList.add('delete-button');
     deleteButton.addEventListener('click', () => {
       deleteTask(index);
     });
-
-    li.appendChild(completeButton);
-    li.appendChild(editButton);
     li.appendChild(deleteButton);
 
     if (task.completed) {
@@ -65,11 +74,9 @@ function renderTasks() {
     }
   });
 
-  // Save tasks to LocalStorage
   saveTasks();
 }
 
-// Add a new task
 function addTask(text, dueDate) {
   const newTask = {
     text,
@@ -83,43 +90,34 @@ function addTask(text, dueDate) {
   renderTasks();
 }
 
-// Toggle task status (Complete/Incomplete)
 function toggleTaskStatus(index) {
   tasks[index].completed = !tasks[index].completed;
   tasks[index].dateCompleted = tasks[index].completed ? new Date().toISOString() : null;
   renderTasks();
 }
 
-// Edit task
 function editTask(index) {
-  const taskToEdit = tasks[index];
-  const updatedTaskText = prompt('Edit the task:', taskToEdit.text);
-  if (updatedTaskText !== null) {
-    const updatedDueDate = prompt('Edit the due date:', taskToEdit.dueDate);
-    tasks[index].text = updatedTaskText;
-    tasks[index].dueDate = updatedDueDate;
+  const editedText = prompt('Edit the task:', tasks[index].text);
+  if (editedText !== null) {
+    tasks[index].text = editedText;
     renderTasks();
   }
 }
 
-// Delete task
 function deleteTask(index) {
   tasks.splice(index, 1);
   renderTasks();
 }
 
-// Save tasks to LocalStorage
 function saveTasks() {
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
-// Format the date and time
 function formatDate(dateTimeString) {
   const date = new Date(dateTimeString);
   return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 }
 
-// Handle form submission
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const taskText = taskInput.value.trim();
@@ -131,5 +129,20 @@ form.addEventListener('submit', (e) => {
   }
 });
 
-// Initial rendering
+pendingTasksList.addEventListener('click', (event) => {
+  if (event.target.classList.contains('complete-button')) {
+    const li = event.target.closest('li');
+    const index = Array.from(pendingTasksList.children).indexOf(li);
+    toggleTaskStatus(index);
+  }
+});
+
+completedTasksList.addEventListener('click', (event) => {
+  if (event.target.classList.contains('incomplete-button')) {
+    const li = event.target.closest('li');
+    const index = Array.from(completedTasksList.children).indexOf(li);
+    toggleTaskStatus(index);
+  }
+});
+
 renderTasks();
