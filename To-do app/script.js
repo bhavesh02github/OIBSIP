@@ -5,10 +5,8 @@ const dueDateInput = document.getElementById('due-date-input');
 const pendingTasksList = document.getElementById('pending-tasks-list');
 const completedTasksList = document.getElementById('completed-tasks-list');
 
-// Load tasks from LocalStorage if available
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
-// Render tasks to the appropriate lists
 function renderTasks() {
   pendingTasksList.innerHTML = '';
   completedTasksList.innerHTML = '';
@@ -44,6 +42,12 @@ function renderTasks() {
       toggleTaskStatus(index);
     });
 
+    const editButton = document.createElement('button');
+    editButton.textContent = 'Edit';
+    editButton.addEventListener('click', () => {
+      editTask(index);
+    });
+
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
     deleteButton.addEventListener('click', () => {
@@ -51,6 +55,7 @@ function renderTasks() {
     });
 
     li.appendChild(completeButton);
+    li.appendChild(editButton);
     li.appendChild(deleteButton);
 
     if (task.completed) {
@@ -78,13 +83,26 @@ function addTask(text, dueDate) {
   renderTasks();
 }
 
+// Toggle task status (Complete/Incomplete)
 function toggleTaskStatus(index) {
   tasks[index].completed = !tasks[index].completed;
   tasks[index].dateCompleted = tasks[index].completed ? new Date().toISOString() : null;
   renderTasks();
 }
 
+// Edit task
+function editTask(index) {
+  const taskToEdit = tasks[index];
+  const updatedTaskText = prompt('Edit the task:', taskToEdit.text);
+  if (updatedTaskText !== null) {
+    const updatedDueDate = prompt('Edit the due date:', taskToEdit.dueDate);
+    tasks[index].text = updatedTaskText;
+    tasks[index].dueDate = updatedDueDate;
+    renderTasks();
+  }
+}
 
+// Delete task
 function deleteTask(index) {
   tasks.splice(index, 1);
   renderTasks();
@@ -115,4 +133,3 @@ form.addEventListener('submit', (e) => {
 
 // Initial rendering
 renderTasks();
-
