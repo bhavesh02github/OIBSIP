@@ -1,5 +1,7 @@
 Oasis Infobyte Internship on Web Development And Designing using HTML, CSS, and JS 
 
+LEVEL 2
+
 Task 1: Calculator (HTML, CSS, JS) -> Live link: https://bhavesh02github.github.io/Calculator/Calculator/
 
 Task 2: Tribute Page (HTML, CSS) -> Live link: https://bhavesh02github.github.io/Tribute-page/Tribute%20Page/
