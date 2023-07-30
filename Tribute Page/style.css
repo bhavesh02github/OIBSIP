@@ -1,0 +1,95 @@
+body {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;  
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-image: linear-gradient(to bottom right, #f21b3f, #111);
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+    header {
+      color: black;
+      text-align: center;
+      padding: 1rem 0;
+    }
+  
+    
+    header h1 {
+      font-size: 4rem;
+      margin: 0;
+    }
+    
+    a:hover {
+      color: #f21b3f; /* Lighter red */
+      text-decoration: underline;
+    }
+  
+    blockquote:hover {
+      transform: scale(1.02); /* Slightly scale up on hover */
+    }
+  
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      background-color: #222;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  
+    .image {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 1rem auto;
+      border-radius: 6px;
+      box-shadow: #111;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  
+    .tribute-info {
+      margin-top: 1rem;
+      text-align: center;
+    }
+  
+    .tribute-info h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+  
+    .tribute-info p {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+  
+    .tribute-content {
+      margin-top: 1rem;
+    }
+  
+    .tribute-content p {
+      margin-bottom: 1rem;
+    }
+  
+    footer {
+      text-align: center;
+      padding: 1rem 0;
+      color: #888;
+    }
+  
+    a {
+      color: #f21b3f;
+    }
+  
+    a:hover {
+      color: #fdbb2d;
+    }
+  
+    blockquote {
+      background-color: #333;
+      border-left: 5px solid #f21b3f;
+      border-radius: 5px;
+      padding: 10px 20px;
+      margin: 20px 0;
+      color: #fff;
+      font-size: 1.2rem;
+    }
