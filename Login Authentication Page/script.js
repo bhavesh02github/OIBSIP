@@ -1,7 +1,6 @@
 let users = [
   { username: "user1@gmail.com", password: "user1" },
   { username: "user2@gmail.com", password: "user2" },
-  // Add more users as needed
 ];
 
 function  login() {
